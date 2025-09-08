@@ -1,0 +1,129 @@
+Step 1: data structure understand
+Columns:
+  Blood_Type
+
+  Medical_Condition
+
+  Date_of_Admission
+
+ Doctor
+
+ Hospital
+
+ Insurance_Provider
+
+ Billing_Amount
+
+ Room_Number
+
+ Admission_Type
+
+ Discharge_Date
+
+ Medication
+
+ Test_Results
+
+
+
+Step 2: Basic Data 
+SELECT * 
+FROM Healthcare
+LIMIT 10;
+👉 some rows see bcz data structure understand
+
+
+
+step:3 Would you like me to also give you how to check missing/null values
+
+SELECT 
+    SUM(CASE WHEN `Blood Type` IS NULL THEN 1 ELSE 0 END) AS Missing_BloodType,
+    SUM(CASE WHEN `Medical Condition` IS NULL THEN 1 ELSE 0 END) AS Missing_Condition,
+    SUM(CASE WHEN `Billing Amount` IS NULL THEN 1 ELSE 0 END) AS Missing_Billing,
+    SUM(CASE WHEN `Test Results` IS NULL THEN 1 ELSE 0 END) AS Missing_TestResults
+FROM healthcare_dataset_1000;
+👉 Identify columns with missing values
+
+
+
+
+Step 4: Summary Statistics (Billing Amount)
+
+SELECT 
+    MIN(`Billing Amount`) AS Min_Billing,
+    MAX(`Billing Amount`) AS Max_Billing,
+    AVG(`Billing Amount`) AS Avg_Billing,
+    SUM(`Billing Amount`) AS Total_Billing
+FROM healthcare_dataset_1000;
+👉 Summary of Total Billing
+
+Step 5: Number of Patients by Medical Condition
+
+SELECT 
+    `Medical Condition`, 
+    COUNT(*) AS Total_Patients
+FROM healthcare_dataset_1000
+GROUP BY `Medical Condition`;
+👉Patients count per medical condition
+
+Step 6: Patients by Admission Type
+
+SELECT 
+    `Admission Type`, 
+    COUNT(*) AS Patients_Count
+FROM healthcare_dataset_1000
+GROUP BY `Admission Type`;
+👉 Patient count by Admission Type (Emergency, Urgent, Elective)
+
+
+Step 7: Medication Analysis
+
+SELECT 
+    Medication, 
+    COUNT(*) AS Usage_Count
+FROM healthcare_dataset_1000
+GROUP BY Medication
+ORDER BY Usage_Count DESC;
+
+
+Step 8: Test Results Analysis
+
+SELECT 
+    `Test Results`, 
+    COUNT(*) AS Result_Count
+FROM healthcare_dataset_1000
+GROUP BY `Test Results`
+LIMIT 0, 25;
+
+👉 Patient count by Test Result (Positive, Inconclusive)
+
+Step 9: Doctor wise 
+
+SELECT 
+    Doctor, 
+    COUNT(*) AS Total_Patients
+FROM healthcare_dataset_1000
+GROUP BY Doctor
+ORDER BY Total_Patients DESC;
+
+👉 Patient count by Doctor
+
+Step 10: Hospital-wise Billing
+
+SELECT 
+    Hospital, 
+    SUM(`Billing Amount`) AS Total_Hospital_Billing,
+    AVG(`Billing Amount`) AS Avg_Hospital_Billing
+FROM healthcare_dataset_1000
+GROUP BY Hospital
+ORDER BY Total_Hospital_Billing DESC
+LIMIT 0, 25;
+DESCRIBE healthcare_dataset_1000;
+
+👉 Hospital-wise maximum billing
+
+
+
+
+
+
